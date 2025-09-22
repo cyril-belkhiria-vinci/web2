@@ -2,7 +2,7 @@ import { Router } from "express";
 import { Film } from "../types";
 
 const router = Router();
-
+let nbrAPI = 0 ;
 const defaultFilms : Film[] = [
     {
         id:1,
@@ -28,6 +28,8 @@ router.get("/",(req,res)=>{
     if (req.query.order && typeof req.query.order !== "string") {
     return res.sendStatus(400);
   }
+    nbrAPI = nbrAPI + 1 ;
+    console.log("GET COUNTER : " + nbrAPI)
     return res.json(defaultFilms)
 })
 
