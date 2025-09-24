@@ -29,6 +29,7 @@ router.get("/",(req,res)=>{
     return res.sendStatus(400);
   }
     nbrAPI = nbrAPI + 1 ;
+    console.log(req.path);
     console.log("GET COUNTER : " + nbrAPI)
     return res.json(defaultFilms)
 })
