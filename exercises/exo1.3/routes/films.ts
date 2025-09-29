@@ -44,12 +44,29 @@ router.get("/:id",(req,res)=>{
     return res.status(400);
   }
   const id = Number(req.params.id);
-  if(!isNaN(id))
+  if(isNaN(id))
     return res.status(400).json("Id non valide");
   const film = defaultFilms.find(film=>film.id === id);
   if(!film)
     return res.status(404).json("This film doesn't exist");
   return res.status(200).json(film);
 });
+
+router.post("/",(req,res)=>{
+    const {title,director,duration,budget,description,imageUrl} = req.body;
+    if(!title ||!director || typeof duration !== "number"|| duration<=0 )
+        return res.status(400).json("Invalid film data");
+    const newFilm = {
+        id:defaultFilms.length+1,
+        title,
+        director,
+        duration,
+        ...(budget !== undefined && {budget}),
+        ...(description !== undefined && {description}),
+        ...(imageUrl !== undefined && {imageUrl}),
+    }
+    defaultFilms.push(newFilm);
+    return res.status(200).json(newFilm);
+})
 
 export default router;
