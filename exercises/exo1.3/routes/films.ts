@@ -65,8 +65,11 @@ router.post("/",(req,res)=>{
         ...(description !== undefined && {description}),
         ...(imageUrl !== undefined && {imageUrl}),
     }
+    const exist = defaultFilms.some(f=>f.title.toLowerCase() === newFilm.title.toLowerCase()&&f.director.toLowerCase()===newFilm.director.toLowerCase());
+    if(exist)
+        return res.status(409).json("Film already exist");
     defaultFilms.push(newFilm);
-    return res.status(200).json(newFilm);
+    return res.status(201).json(newFilm);
 })
 
 export default router;
