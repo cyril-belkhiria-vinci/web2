@@ -1,0 +1,60 @@
+
+GET http://localhost:3000/films
+
+###
+
+GET http://localhost:3000/films/4
+
+###
+
+GET http://localhost:3000/films?minimum-duration=115
+
+###
+
+POST  http://localhost:3000/films
+Content-Type: application/json
+
+{
+    "title" : "Memories of murder",
+    "director" : "Bong Joon Ho",
+    "duration" : 131
+}
+
+###
+
+POST  http://localhost:3000/films
+Content-Type: application/json
+
+{
+    "title" : "Rush Hour",
+    "director" : "Brett Ratner",
+    "duration" : 97,
+    "budget" : 35,
+    "description" : "Rien ne prédisposait l'inspecteur Lee et le détective James Carter à faire équipe un jour.Pourtant, lorsque la fille du consul de Chine aux États-Unis est victime d'un enlèvement, le FBI ordonne aux deux limiers de collaborer. Les relations entre Lee, héros de la police royale de Hong Kong, et Carter, personnage prétentieux et incontrôlable, brebis galeuse de la police de Los Angeles, s'annoncent tendues."
+}
+
+###
+
+DELETE http://localhost:3000/films/3
+
+###
+
+PATCH http://localhost:3000/films/5
+Content-Type: application/json
+
+{
+    "budget" : 10000001
+}
+
+### PUT - Remplacer le film 2 avec des nouvelles infos
+PUT http://localhost:3000/films/2
+Content-Type: application/json
+
+{
+  "title": "New Film",
+  "director": "Nouvel Auteur",
+  "duration": 110,
+  "budget": 6000000,
+  "description": "Remplacement total",
+  "imageUrl": "http://image.com/film.jpg"
+}
