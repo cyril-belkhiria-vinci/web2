@@ -1,3 +1,38 @@
+import './App.css'
+
+const PageTitle = ({ title }: { title: string }) => {
+  return <h1>{title}</h1>;
+};
+
+const Cinema = ({
+  name,
+  movie1Title,
+  movie1Director,
+  movie2Title,
+  movie2Director,
+}: {
+  name: string;
+  movie1Title: string;
+  movie1Director: string;
+  movie2Title: string;
+  movie2Director: string;
+}) => {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <ul>
+        <li>
+          <strong>{movie1Title}</strong> - Réalisateur : {movie1Director}
+        </li>
+        <li>
+          <strong>{movie2Title}</strong> - Réalisateur : {movie2Director}
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+
 const App = () => {
   const pageTitle = "Informations sur les films dans les cinémas";
 
@@ -15,35 +50,23 @@ const App = () => {
 
   return (
     <div>
-      <h1>{pageTitle}</h1>
+      <PageTitle title={pageTitle} />
 
-      <div>
-        <h2>{cinema1Name}</h2>
-        <ul>
-          <li>
-            <strong>{cinema1Movie1Title}</strong> - Réalisateur :{" "}
-            {cinema1Movie1Director}
-          </li>
-          <li>
-            <strong>{cinema1Movie2Title}</strong> - Réalisateur :{" "}
-            {cinema1Movie2Director}
-          </li>
-        </ul>
-      </div>
+      <Cinema
+        name={cinema1Name}
+        movie1Title={cinema1Movie1Title}
+        movie1Director={cinema1Movie1Director}
+        movie2Title={cinema1Movie2Title}
+        movie2Director={cinema1Movie2Director}
+      />
 
-      <div>
-        <h2>{cinema2Name}</h2>
-        <ul>
-          <li>
-            <strong>{cinema2Movie1Title}</strong> - Réalisateur :{" "}
-            {cinema2Movie1Director}
-          </li>
-          <li>
-            <strong>{cinema2Movie2Title}</strong> - Réalisateur :{" "}
-            {cinema2Movie2Director}
-          </li>
-        </ul>
-      </div>
+      <Cinema
+        name={cinema2Name}
+        movie1Title={cinema2Movie1Title}
+        movie1Director={cinema2Movie1Director}
+        movie2Title={cinema2Movie2Title}
+        movie2Director={cinema2Movie2Director}
+      />
     </div>
   );
 };
