@@ -24,26 +24,26 @@ const Cinema = (props:CinemaProps)=>{
 const App = () => {
   const pageTitle = "Informations sur les films dans les cinémas";
 
-  const cinema1Name = "UGC DeBrouckère";
+  const cinema1Name = "UGC DeBrouckère : ";
 
   const movie1 : Movie = {
-    title: "HAIKYU-THE DUMPSTER BATTLE",
-    director: "Susumu Mitsunaka",
+    title: "HAIKYU-THE DUMPSTER BATTLE ",
+    director: "Susumu Mitsunaka ",
   };
   const movie2 = {
     title: "GOODBYE JULIA ",
-    director: "Mohamed Kordofani",
+    director: "Mohamed Kordofani ",
   };
 
-  const cinema2Name = "UGC Toison d'Or";
+  const cinema2Name = "UGC Toison d'Or : ";
   
   const movie3 : Movie = {
-    title: "THE WATCHERS",
-    director: "Ishana Night Shyamalan",
+    title: "THE WATCHERS ",
+    director: "Ishana Night Shyamalan ",
   };
   const movie4 = {
-    title: "BAD BOYS: RIDE OR DIE",
-    director: "Adil El Arbi, Bilall Fallah",
+    title: "BAD BOYS: RIDE OR DIE ",
+    director: "Adil El Arbi, Bilall Fallah ",
   };
 
   return (
