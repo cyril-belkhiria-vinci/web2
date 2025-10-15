@@ -56,9 +56,9 @@ const moviesCinema2 = [
   
   return (
     <div>
-        <Header logoUrl={headerLogoUrl}>
-          <h1>Bienvenue au cinéma !</h1>
-        </Header>
+      <Header logoUrl={headerLogoUrl}>
+        <h1>Bienvenue au cinéma !</h1>
+      </Header>
       <PageTitle title={pageTitle} />
 
       <Cinema name={cinema1Name} movies= {moviesCinema1} />
@@ -66,7 +66,7 @@ const moviesCinema2 = [
       <Cinema name={cinema2Name} movies={moviesCinema2} />
 
       <Footer logoUrl={footerLogoUrl}>
-        <p>Mon Footer</p>
+        <h2>Mon Footer</h2>
       </Footer>
     </div>
   );
