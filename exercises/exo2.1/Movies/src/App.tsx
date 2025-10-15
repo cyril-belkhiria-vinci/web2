@@ -1,8 +1,14 @@
 import './App.css'
 import PageTitle from './components/PageTitle';
 import Cinema from './components/Cinema';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const App = () => {
+  const headerLogoUrl ="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=100&q=80";
+
+  const footerLogoUrl ="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=100&q=80";
+
   const pageTitle = "Informations sur les films dans les cinémas";
 
   const cinema1Name = "UGC DeBrouckère";
@@ -50,11 +56,18 @@ const moviesCinema2 = [
   
   return (
     <div>
+        <Header logoUrl={headerLogoUrl}>
+          <h1>Bienvenue au cinéma !</h1>
+        </Header>
       <PageTitle title={pageTitle} />
 
       <Cinema name={cinema1Name} movies= {moviesCinema1} />
 
       <Cinema name={cinema2Name} movies={moviesCinema2} />
+
+      <Footer logoUrl={footerLogoUrl}>
+        <p>Mon Footer</p>
+      </Footer>
     </div>
   );
 };
