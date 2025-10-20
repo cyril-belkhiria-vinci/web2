@@ -19,6 +19,7 @@ function App() {
         <ClickCounter
         title="Click the button below"
         message="You are a master in the art of clicking !"
+        hoverMessage="Please click on me now !"
       />
       <div className="card">
         <p>
