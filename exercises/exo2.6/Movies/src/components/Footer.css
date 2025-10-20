@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ddd;
+  margin-top: 2rem;
+}
+
+.footer-logo {
+  height: 40px;
+  margin-right: 16px;
+}
