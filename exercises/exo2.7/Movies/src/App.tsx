@@ -13,7 +13,7 @@ const MovieFav : Movie[] =[
   },
   {
     titre : "Dead Poets Society",
-    director : "peter Weir",
+    director : "Peter Weir",
     dureeMinute : 130,
     image :"https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p11671_p_v8_ad.jpg",
     description :"Todd Anderson, un garçon plutôt timide, est envoyé dans la prestigieuse académie de Welton, réputée pour être l'une des plus fermées et austères des États-Unis, là où son frère avait connu de brillantes études. C'est dans cette université qu'il va faire la rencontre d'un professeur de lettres anglaises plutôt étrange, M. Keating, qui les encourage à toujours refuser l'ordre établi. Les cours de M. Keating vont bouleverser la vie de l'étudiant réservé et de ses amis."
