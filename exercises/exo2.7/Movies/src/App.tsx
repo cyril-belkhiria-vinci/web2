@@ -35,6 +35,12 @@ const MovieFav : Movie[] =[
     director : "David Yates",
     dureeMinute : 153,
     image : "https://www.mediatheque.be/fichiers/60/d9/6f/cover_vh0413_scale_500x500.jpg"
+  },
+  {
+    titre :"Le Comte De Monte-Cristo",
+    director : "Alexendre De La Patellière",
+    dureeMinute : 178 ,
+    image : "https://fr.web.img6.acsta.net/img/29/eb/29eb8341475fdb0b19b1d7b995b70e17.jpg"
   }
 ];
 
