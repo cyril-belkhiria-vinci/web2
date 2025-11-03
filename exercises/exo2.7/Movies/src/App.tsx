@@ -41,6 +41,12 @@ const MovieFav : Movie[] =[
     director : "Alexendre De La Patellière",
     dureeMinute : 178 ,
     image : "https://fr.web.img6.acsta.net/img/29/eb/29eb8341475fdb0b19b1d7b995b70e17.jpg"
+  },
+  {
+    titre :"Chainsaw Man - The Movie: Reze Arc",
+    director : "Tatsuya Yoshihara",
+    dureeMinute : 100 ,
+    image : "https://cdn.kinepolis.be/images/BE/65459BAD-CA99-4711-A97B-E049A5FA94D2/HO00012497/0000031188/Chainsaw_Man_-_Le_Film_:_LArc_de_Reze.jpg"
   }
 ];
 
