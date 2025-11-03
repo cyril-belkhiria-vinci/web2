@@ -8,7 +8,7 @@ const theme = createTheme({
     secondary: {
       main: "#9c27b0", // violet
     },
-    background:
+    background:{
       default: "#f5f5f5", // couleur de fond clair
       paper: "#ffffff", // fond des cartes
     },
