@@ -4,6 +4,7 @@ import { AboutPage, ContactPage, HomePage } from "./App.tsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
+import { UserPage } from "./App.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         path: "contact",
         element: <ContactPage />,
       },
+      {
+        path: "users/:userId",
+        element: <UserPage />,
+      }
     ],
   },
 ]);
