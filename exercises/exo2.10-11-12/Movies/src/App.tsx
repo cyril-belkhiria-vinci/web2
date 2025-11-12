@@ -2,11 +2,17 @@ import { useState } from "react";
 import type { SyntheticEvent } from "react";
 import "./App.css";
 import type { Movie } from "./types";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, Link, useOutletContext, useParams } from "react-router-dom";
 import PageTitle from "./components/PageTitle";
 import Cinema from "./components/Cinema";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+
+interface MovieContext {
+  movies: Movie[];
+  setMovies: (movies: Movie[]) => void;
+  addMovie: (newMovie: Omit<Movie, "id">) => void;
+}
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -20,16 +26,28 @@ const NavBar = () => {
   );
 };
 
-const HomePage = () => <p>Home Page</p>;
+
+const HomePage = () => {
+  const { movies } = useOutletContext<MovieContext>();
+
+  return (
+    <div style={{ padding: "2rem" }}>
+      <h1>🎬 Mes Films Favoris</h1>
+      <ul>
+        {movies.map((m) => (
+          <li key={m.id}>
+            <Link to={`/movies/${m.id}`}>{m.titre}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 const CinemaPage = () => {
-  const headerLogoUrl =
-    "https://plus.unsplash.com/premium_photo-1672116453000-c31b150f48ef?auto=format&fit=crop&q=80&w=1170";
-  const footerLogoUrl =
-    "https://images.unsplash.com/photo-1532993680872-98b088e2cacd?auto=format&fit=crop&q=80&w=1170";
-
+  const headerLogoUrl = "https://plus.unsplash.com/premium_photo-1672116453000-c31b150f48ef?auto=format&fit=crop&q=80&w=1170";
+  const footerLogoUrl = "https://images.unsplash.com/photo-1532993680872-98b088e2cacd?auto=format&fit=crop&q=80&w=1170";
   const pageTitle = "Informations sur les films dans les cinémas";
-
   const cinema1Name = "UGC De Brouckère";
   const cinema2Name = "UGC Toison d'Or";
 
@@ -39,7 +57,6 @@ const CinemaPage = () => {
     { title: "INCEPTION", director: "Christopher Nolan", description: "A mind-bending sci-fi thriller..." },
     { title: "PARASITE", director: "Bong Joon-ho", description: "An Oscar-winning dark comedy thriller..." },
   ];
-
   const moviesCinema2 = [
     { title: "THE WATCHERS", director: "Ishana Night Shyamalan", description: "A suspenseful thriller..." },
     { title: "BAD BOYS: RIDE OR DIE", director: "Adil El Arbi, Bilall Fallah", description: "The latest installment..." },
@@ -63,38 +80,15 @@ const CinemaPage = () => {
 };
 
 const MovieListPage = () => {
-  const MovieFav: Movie[] = [
-    {
-      titre: "20th Century Girl",
-      director: "Bang Woo-Ri",
-      dureeMinute: 119,
-      image:
-        "https://image.tmdb.org/t/p/original/od22ftNnyag0TTxcnJhlsu3aLoU.jpg",
-      description:
-        "En 1999, Bo Ra découvre l’amour en observant le crush de sa meilleure amie.",
-    },
-    {
-      titre: "Dead Poets Society",
-      director: "Peter Weir",
-      dureeMinute: 130,
-      image:
-        "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p11671_p_v8_ad.jpg",
-      description:
-        "Todd Anderson entre dans une école prestigieuse où un professeur change sa vie.",
-    },
-    { titre : "Fate/Stay Night : Heaven's Feel III. Spring Song", director :"Tomonori Sudo", dureeMinute :120, image:"https://upload.wikimedia.org/wikipedia/en/3/33/SpringSongPoster.jpg" }, { titre : " Dune: Part Two", director : "Denis Villeneuve", dureeMinute : 167, image : "https://aesthetealley.com/wp-content/uploads/2024/04/51ZMaTI7rL._AC_UF8941000_QL80_.jpg" }, { titre : "Harry Potter Et Le Prince De Sang-Mélée", director : "David Yates", dureeMinute : 153, image : "https://www.mediatheque.be/fichiers/60/d9/6f/cover_vh0413_scale_500x500.jpg" }, { titre :"Le Comte De Monte-Cristo", director : "Alexendre De La Patellière", dureeMinute : 178 , image : "https://fr.web.img6.acsta.net/img/29/eb/29eb8341475fdb0b19b1d7b995b70e17.jpg" }, { titre :"Chainsaw Man - The Movie: Reze Arc", director : "Tatsuya Yoshihara", dureeMinute : 100 , image : "https://cdn.kinepolis.be/images/BE/65459BAD-CA99-4711-A97B-E049A5FA94D2/HO00012497/0000031188/Chainsaw_Man_-_Le_Film_:_LArc_de_Reze.jpg" }
-  ];
-
-
-  const [movies] = useState<Movie[]>(MovieFav);
+  const { movies } = useOutletContext<MovieContext>();
 
   return (
     <div style={{ padding: "2rem" }}>
       <h1>🎬 Mes Films Préférés</h1>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-        {movies.map((m, index) => (
+        {movies.map((m) => (
           <div
-            key={index}
+            key={m.id}
             style={{ border: "1px solid #ccc", padding: "1rem", width: "250px" }}
           >
             {m.image && (
@@ -105,12 +99,8 @@ const MovieListPage = () => {
               />
             )}
             <h3>{m.titre}</h3>
-            <p>
-              <strong>Réalisateur:</strong> {m.director}
-            </p>
-            <p>
-              <strong>Durée:</strong> {m.dureeMinute} minutes
-            </p>
+            <p><strong>Réalisateur:</strong> {m.director}</p>
+            <p><strong>Durée:</strong> {m.dureeMinute} minutes</p>
             {m.description && <p>{m.description}</p>}
           </div>
         ))}
@@ -121,6 +111,7 @@ const MovieListPage = () => {
 
 const AddMoviePage = () => {
   const navigate = useNavigate();
+  const { addMovie } = useOutletContext<MovieContext>();
 
   const [titre, setTitre] = useState("");
   const [director, setDirector] = useState("");
@@ -137,7 +128,7 @@ const AddMoviePage = () => {
       return;
     }
 
-    const newMovie: Movie = {
+      const newMovie: Omit<Movie, "id"> = {
       titre,
       director,
       dureeMinute,
@@ -145,10 +136,9 @@ const AddMoviePage = () => {
       description,
       budget,
     };
+    addMovie(newMovie);
 
-    console.log("Film ajouté :", newMovie);
     alert(`Film "${titre}" ajouté avec succès !`);
-
     navigate("/movies");
   };
 
@@ -211,12 +201,91 @@ const AddMoviePage = () => {
   );
 };
 
-const App = () => (
-  <div>
-    <NavBar />
-    <Outlet />
-  </div>
-);
+const MoviePage = () => {
+  const { id } = useParams();
+  const { movies } = useOutletContext<MovieContext>();
+  const movie = movies.find((m) => m.id === Number(id));
+
+  if (!movie) return <p>Film introuvable 😢</p>;
+
+  return (
+    <div style={{ padding: "2rem" }}>
+      <h2>{movie.titre}</h2>
+      <p><strong>Réalisateur:</strong> {movie.director}</p>
+      <p><strong>Durée:</strong> {movie.dureeMinute} minutes</p>
+      {movie.image && <img src={movie.image} alt={movie.titre} style={{ width: "300px", margin: "1rem 0" }} />}
+      {movie.description && <p>{movie.description}</p>}
+      {movie.budget && <p>💰 Budget : {movie.budget} millions</p>}
+    </div>
+  );
+};
+
+const App = () => {
+  const [movies, setMovies] = useState<Movie[]>([
+    {
+      id : 1,
+      titre: "20th Century Girl",
+      director: "Bang Woo-Ri",
+      dureeMinute: 119,
+      image: "https://image.tmdb.org/t/p/original/od22ftNnyag0TTxcnJhlsu3aLoU.jpg",
+      description: "En 1999, Bo Ra découvre l’amour en observant le crush de sa meilleure amie.",
+    },
+    {
+      id : 2,
+      titre: "Dead Poets Society",
+      director: "Peter Weir",
+      dureeMinute: 130,
+      image: "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p11671_p_v8_ad.jpg",
+      description: "Todd Anderson entre dans une école prestigieuse où un professeur change sa vie.",
+    },
+    {
+      id : 3,
+      titre : "Fate/Stay Night : Heaven's Feel III. Spring Song", 
+      director :"Tomonori Sudo", 
+      dureeMinute :120, 
+      image:"https://upload.wikimedia.org/wikipedia/en/3/33/SpringSongPoster.jpg" 
+    }, 
+    {
+      id : 4,
+      titre : " Dune: Part Two", 
+      director : "Denis Villeneuve", 
+      dureeMinute : 167, 
+      image : "https://aesthetealley.com/wp-content/uploads/2024/04/51ZMaTI7rL._AC_UF8941000_QL80_.jpg" 
+    },
+    {
+      id : 5,
+      titre : "Harry Potter Et Le Prince De Sang-Mélée", 
+      director : "David Yates", 
+      dureeMinute : 153, 
+      image : "https://www.mediatheque.be/fichiers/60/d9/6f/cover_vh0413_scale_500x500.jpg" 
+    }, 
+    {
+      id : 6, 
+      titre :"Le Comte De Monte-Cristo", 
+      director : "Alexendre De La Patellière", 
+      dureeMinute : 178 , 
+      image : "https://fr.web.img6.acsta.net/img/29/eb/29eb8341475fdb0b19b1d7b995b70e17.jpg" 
+    }, 
+    {
+      id : 7, 
+      titre :"Chainsaw Man - The Movie: Reze Arc", 
+      director : "Tatsuya Yoshihara", 
+      dureeMinute : 100 , 
+      image : "https://cdn.kinepolis.be/images/BE/65459BAD-CA99-4711-A97B-E049A5FA94D2/HO00012497/0000031188/Chainsaw_Man_-_Le_Film_:_LArc_de_Reze.jpg" 
+    }
+  ]);
+  const addMovie = (newMovie: Omit<Movie, "id">) => {
+    const nextId = movies.length > 0 ? movies[movies.length - 1].id + 1 : 1;
+    setMovies([...movies, { id: nextId, ...newMovie }]);
+  };
+
+  return (
+    <div>
+      <NavBar />
+      <Outlet context={{ movies, setMovies, addMovie }} />
+    </div>
+  );
+};
 
 export default App;
-export { HomePage, CinemaPage, MovieListPage, AddMoviePage };
+export { HomePage, CinemaPage, MovieListPage, AddMoviePage, MoviePage };

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App, { HomePage, CinemaPage, MovieListPage, AddMoviePage } from "./App";
+import App, { HomePage, CinemaPage, MovieListPage, AddMoviePage, MoviePage } from "./App";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +12,7 @@ const router = createBrowserRouter([
       { path: "cinema", element: <CinemaPage /> },
       { path: "movies", element: <MovieListPage /> },
       { path: "addMovie", element: <AddMoviePage /> },
+      { path: "/movies/:id", element: <MoviePage /> },
     ],
   },
 ]);

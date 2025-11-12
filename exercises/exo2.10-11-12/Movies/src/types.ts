@@ -1,4 +1,5 @@
 interface Movie {
+    id : number ,
     titre : string,
     director : string,
     dureeMinute : number,
