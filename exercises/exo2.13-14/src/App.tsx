@@ -9,7 +9,7 @@ type JokeResponse = {
 const App = () => {
   const [joke, setJoke] = useState<JokeResponse | null>(null);
 
-  useEffect(() => {
+  const fetchJoke = () => {
     fetch("https://v2.jokeapi.dev/joke/Any?type=single")
       .then((res) => {
         if (!res.ok) {
@@ -23,7 +23,15 @@ const App = () => {
       .catch((err) => {
         console.error("Erreur lors du fetch :", err);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchJoke();
+    const interval = setInterval(()=>{
+      fetchJoke();
+    },10000);
+    return () => clearInterval(interval);
+  },[]);
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial" }}>
