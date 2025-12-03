@@ -1,0 +1,3 @@
+[submodule "exercises/exo3.1/jwt-ts-api-boilerplate"]
+	path = exercises/exo3.1/jwt-ts-api-boilerplate
+	url = https://github.com/e-vinci/jwt-ts-api-boilerplate.git
