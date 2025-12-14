@@ -70,25 +70,17 @@ return film;
 
 replace(id: number, data: Partial<Film>): Film | null {
 const { title, director, duration } = data;
-
 if (!title || !director || typeof duration !== "number" || duration <= 0)
   return null;
-
 const newFilm: Film = { id, ...data } as Film;
-
 const index = films.findIndex(f => f.id === id);
-
 if (index !== -1) {
   films[index] = newFilm;
   return newFilm;
 }
-
 const idExists = films.some(f => f.id === id);
 if (idExists) return null;
-
 films.push(newFilm);
 return newFilm;
-
-
 }
 };

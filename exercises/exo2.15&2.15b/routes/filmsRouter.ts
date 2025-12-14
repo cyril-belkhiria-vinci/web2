@@ -32,6 +32,9 @@ return res.status(201).json(film);
 
 router.delete("/:id", (req, res) => {
 const id = Number(req.params.id);
+  if (isNaN(id)) {
+    return res.sendStatus(400);
+  }
 const deleted = filmService.delete(id);
 if (!deleted) return res.status(404).json("Film not found");
 return res.json(deleted);
